@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -12,7 +11,6 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- SVG icon defs -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <symbol id="i-sun" viewBox="0 0 64 64">
@@ -76,7 +74,6 @@
       </symbol>
     </defs>
   </svg>
-
   <div class="page">
     <header class="header">
       <div class="brand">
@@ -88,63 +85,48 @@
         <button id="unit-c" class="unit-btn" data-unit="C">°C</button>
       </div>
     </header>
-
-```
-<!-- INPUT FORM -->
-<section id="form-section" class="form-section">
-  <div class="form-intro">
-    <p>Add each leg of your trip. We blend ECMWF, GFS, ICON, GEM, JMA, and Met Office forecasts to give you a single ensemble view — with honest confidence flags.</p>
+    <section id="form-section" class="form-section">
+      <div class="form-intro">
+        <p>Add each leg of your trip. We blend ECMWF, GFS, ICON, GEM, JMA, and Met Office forecasts to give you a single ensemble view — with honest confidence flags.</p>
+      </div>
+      <div id="legs" class="legs"></div>
+      <div class="form-actions">
+        <button id="add-leg" class="btn btn-ghost">+ Add another leg</button>
+        <button id="submit" class="btn btn-primary">Get forecast →</button>
+      </div>
+      <div id="form-error" class="form-error" hidden></div>
+    </section>
+    <section id="loading" class="loading" hidden>
+      <div class="spinner"></div>
+      <div class="loading-text">Fetching forecasts across 6 models…</div>
+    </section>
+    <section id="results" class="results" hidden>
+      <div class="results-header">
+        <div>
+          <div class="eyebrow">Forecast</div>
+          <h2 id="results-title" class="results-title">Your Trip</h2>
+        </div>
+        <div class="results-actions">
+          <button id="export-btn" class="btn btn-primary btn-sm">⬇ Export image</button>
+          <button id="share-btn" class="btn btn-ghost btn-sm">Copy share link</button>
+          <button id="edit-btn" class="btn btn-ghost btn-sm">Edit trip</button>
+        </div>
+      </div>
+      <div class="scroll-wrap">
+        <div id="grid" class="grid"></div>
+      </div>
+      <div class="footer">
+        <div><strong>Sources:</strong> ECMWF · GFS · ICON · GEM · JMA · UK Met Office (via Open-Meteo)</div>
+        <div><strong>Confidence dot:</strong> <span class="conf-dot conf-high"></span> high agreement · <span class="conf-dot conf-med"></span> some spread · <span class="conf-dot conf-low"></span> models disagree</div>
+        <div><strong>Note:</strong> Forecasts past ~7 days have lower skill. Re-check closer to date.</div>
+      </div>
+    </section>
+    <div id="export-root" aria-hidden="true"></div>
+    <footer class="page-footer">
+      <span>TripCast · Powered by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> · No accounts, no tracking</span>
+    </footer>
   </div>
-  <div id="legs" class="legs"></div>
-  <div class="form-actions">
-    <button id="add-leg" class="btn btn-ghost">+ Add another leg</button>
-    <button id="submit" class="btn btn-primary">Get forecast →</button>
-  </div>
-  <div id="form-error" class="form-error" hidden></div>
-</section>
-
-<!-- LOADING -->
-<section id="loading" class="loading" hidden>
-  <div class="spinner"></div>
-  <div class="loading-text">Fetching forecasts across 6 models…</div>
-</section>
-
-<!-- RESULTS -->
-<section id="results" class="results" hidden>
-  <div class="results-header">
-    <div>
-      <div class="eyebrow">Forecast</div>
-      <h2 id="results-title" class="results-title">Your Trip</h2>
-    </div>
-    <div class="results-actions">
-      <button id="export-btn" class="btn btn-primary btn-sm">⬇ Export image</button>
-      <button id="share-btn" class="btn btn-ghost btn-sm">Copy share link</button>
-      <button id="edit-btn" class="btn btn-ghost btn-sm">Edit trip</button>
-    </div>
-  </div>
-  <div class="scroll-wrap">
-    <div id="grid" class="grid"></div>
-  </div>
-  <div class="footer">
-    <div><strong>Sources:</strong> ECMWF · GFS · ICON · GEM · JMA · UK Met Office (via Open-Meteo)</div>
-    <div><strong>Confidence dot:</strong> <span class="conf-dot conf-high"></span> high agreement · <span class="conf-dot conf-med"></span> some spread · <span class="conf-dot conf-low"></span> models disagree</div>
-    <div><strong>Note:</strong> Forecasts past ~7 days have lower skill. Re-check closer to date.</div>
-  </div>
-</section>
-
-<!-- Hidden export render target -->
-<div id="export-root" aria-hidden="true"></div>
-
-<footer class="page-footer">
-  <span>TripCast · Powered by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> · No accounts, no tracking</span>
-</footer>
-```
-
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js"></script>
-
   <script src="app.js"></script>
-
 </body>
 </html>
