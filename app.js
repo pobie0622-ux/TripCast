@@ -422,19 +422,19 @@ function renderDayCard(day) {
   var slots = day.slots || {};
   var hasAnyData = SLOTS.some(function(s) { return slots[s.id]; });
 
+  var subHtml = (day.source === "climatology")
+    ? '<div class="day-sub"><span class="clim-pill" title="Beyond forecast horizon - 10-yr historical average for this date">HIST AVG</span></div>'
+    : '<div class="day-sub"></div>';
+
   var headerHtml =
     '<div class="dow">' + dowFor(day.date) + '</div>' +
     '<div class="date">' + shortDate(day.date) + '</div>' +
-    '<div class="city">' + escapeText(day.city) + '</div>';
+    '<div class="city">' + escapeText(day.city) + '</div>' +
+    subHtml;
 
   if (!hasAnyData) {
     card.innerHTML = headerHtml + '<div style="margin:30px 0; font-size: 12px; color: var(--text-faint);">No data</div>';
     return card;
-  }
-
-  var badgeHtml = "";
-  if (day.source === "climatology") {
-    badgeHtml = '<div class="clim-badge" title="Beyond 16-day forecast - showing 10-yr historical average for this date">HIST AVG</div>';
   }
 
   var slotsHtml = SLOTS.map(function(slot) {
@@ -455,7 +455,7 @@ function renderDayCard(day) {
     '</div>';
   }).join("");
 
-  card.innerHTML = headerHtml + badgeHtml + '<div class="slots">' + slotsHtml + '</div>';
+  card.innerHTML = headerHtml + '<div class="slots">' + slotsHtml + '</div>';
   return card;
 }
 
