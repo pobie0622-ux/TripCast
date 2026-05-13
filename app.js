@@ -54,7 +54,15 @@ function bindUnitToggle() {
 }
 
 function addLeg(data) {
-  state.legs.push(data || { city: "", lat: null, lon: null, start: "", end: "" });
+  if (data) {
+    state.legs.push(data);
+  } else {
+    // For a fresh leg, inherit the previous leg's end date as this leg's start.
+    // Common pattern: arrive on the same day you depart the prior city.
+    var prev = state.legs.length > 0 ? state.legs[state.legs.length - 1] : null;
+    var inheritedStart = (prev && prev.end) ? prev.end : "";
+    state.legs.push({ city: "", lat: null, lon: null, start: inheritedStart, end: "" });
+  }
   renderLegs();
 }
 
