@@ -217,6 +217,8 @@ h1 em { font-style: italic; font-weight: 500; color: var(--sun); }
   display: flex; flex-direction: column; align-items: stretch;
   backdrop-filter: blur(6px);
   position: relative;
+  overflow: hidden;
+  min-width: 0;
 }
 .day-clim { border-color: rgba(185,167,255,0.3); }
 
@@ -248,34 +250,53 @@ h1 em { font-style: italic; font-weight: 500; color: var(--sun); }
 .slot {
   background: rgba(0,0,0,0.18);
   border-radius: 9px;
-  padding: 8px 6px 9px;
+  padding: 7px 8px 8px;
   display: grid;
-  grid-template-columns: 36px 32px 1fr auto;
+  grid-template-columns: auto 28px 1fr;
+  grid-template-rows: auto auto;
   align-items: center;
-  gap: 6px;
+  column-gap: 6px;
+  row-gap: 2px;
   text-align: left;
+  min-width: 0;
 }
 .slot-label {
   font-size: 10px; letter-spacing: 0.14em; font-weight: 700;
   color: var(--text-dim);
   display: flex; align-items: center; gap: 4px;
+  grid-column: 1;
+  grid-row: 1;
 }
-.slot-icon { display: flex; align-items: center; justify-content: center; }
+.slot-icon {
+  display: flex; align-items: center; justify-content: center;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
 .slot-temp {
   font-family: 'Fraunces', serif;
   font-size: 18px; font-weight: 500;
   text-align: right;
   font-variant-numeric: tabular-nums;
+  grid-column: 3;
+  grid-row: 1;
 }
 .slot-pop {
   font-size: 10px;
   color: var(--rain);
   font-variant-numeric: tabular-nums;
   text-align: right;
-  min-width: 28px;
+  grid-column: 3;
+  grid-row: 2;
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3px;
 }
+.drop-mini { fill: var(--rain); flex-shrink: 0; }
+.drop-mini path { fill: var(--rain); }
 .slot-empty { opacity: 0.4; }
-.slot-empty-text { font-size: 11px; color: var(--text-faint); }
+.slot-empty-text { font-size: 11px; color: var(--text-faint); grid-column: 1 / -1; text-align: center; }
 
 .conf-dot-day { display: inline-block; width: 6px; height: 6px; border-radius: 50%; }
 .conf-dot-day.conf-high { background: var(--conf-high); }
