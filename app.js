@@ -172,8 +172,11 @@ function runForecast() {
 
   var days = expandLegs(state.legs);
   var todayStr = new Date().toISOString().slice(0, 10);
+  // Open-Meteo allows up to ~16 days from today, but the exact boundary varies by
+  // server timezone vs client timezone. Use 14 days as a safe forecast horizon;
+  // dates beyond that fall back to climatology.
   var horizonDate = new Date();
-  horizonDate.setDate(horizonDate.getDate() + FORECAST_HORIZON_DAYS);
+  horizonDate.setDate(horizonDate.getDate() + 14);
   var horizonStr = horizonDate.toISOString().slice(0, 10);
 
   // Split days into "forecastable" and "beyond horizon"
@@ -206,6 +209,11 @@ function runForecast() {
         d.slots = extractSlots(data, d.date);
         d.source = "forecast";
       });
+    }).catch(function(e) {
+      // If the forecast API rejects (likely date past its horizon by a day due
+      // to timezone math), fall back to climatology for this group.
+      console.warn("Forecast failed for group, falling back to climatology:", e.message);
+      return fetchClimatology(group);
     });
   });
 
