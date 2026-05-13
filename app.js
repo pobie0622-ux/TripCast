@@ -439,16 +439,19 @@ function renderDayCard(day) {
 
   var slotsHtml = SLOTS.map(function(slot) {
     var s = slots[slot.id];
-    if (!s) return '<div class="slot slot-empty"><div class="slot-label">' + slot.label + '</div><div class="slot-empty-text">—</div></div>';
+    if (!s) return '<div class="slot slot-empty"><div class="slot-empty-text">' + slot.label + ' —</div></div>';
     var conf = confidenceLevel(s.tempSpread, day.source);
     var iconId = weatherCodeToIcon(s.code);
     var temp = formatTemp(s.temp);
     var pop = s.pop != null ? Math.round(s.pop) : null;
+    var popHtml = pop != null
+      ? '<svg class="drop-mini" width="6" height="8"><use href="#drop"/></svg>' + pop + '%'
+      : '';
     return '<div class="slot">' +
       '<div class="slot-label">' + slot.label + ' <span class="conf-dot-day conf-' + conf + '"></span></div>' +
-      '<div class="slot-icon"><svg width="28" height="28"><use href="#' + iconId + '"/></svg></div>' +
+      '<div class="slot-icon"><svg width="26" height="26"><use href="#' + iconId + '"/></svg></div>' +
       '<div class="slot-temp">' + temp + '°</div>' +
-      '<div class="slot-pop">' + (pop != null ? pop + "%" : "") + '</div>' +
+      '<div class="slot-pop">' + popHtml + '</div>' +
     '</div>';
   }).join("");
 
