@@ -447,7 +447,8 @@ function renderDayCard(day) {
     var popHtml = pop != null
       ? '<svg class="drop-mini" width="6" height="8"><use href="#drop"/></svg>' + pop + '%'
       : '';
-    return '<div class="slot">' +
+    var tooltip = buildSlotTooltip(s, conf, day.source, slot);
+    return '<div class="slot" title="' + escapeAttr(tooltip) + '">' +
       '<div class="slot-label">' + slot.label + ' <span class="conf-dot-day conf-' + conf + '"></span></div>' +
       '<div class="slot-icon"><svg width="26" height="26"><use href="#' + iconId + '"/></svg></div>' +
       '<div class="slot-temp">' + temp + '°</div>' +
@@ -465,6 +466,34 @@ function confidenceLevel(spread, source) {
   if (spread > 5) return "low";
   if (spread > 2.5) return "med";
   return "high";
+}
+
+function buildSlotTooltip(s, conf, source, slot) {
+  var lines = [];
+  var hours = slot.startHour + ":00 – " + (slot.endHour === 24 ? "midnight" : slot.endHour + ":00");
+  lines.push(slot.label + " (" + hours + " local)");
+  if (source === "climatology") {
+    lines.push("");
+    lines.push("Historical average — based on the past 10 years for this date.");
+    lines.push("Not a forecast; long-range models lack skill past ~16 days.");
+  } else {
+    var confLabel = conf === "high" ? "High confidence" : conf === "med" ? "Medium confidence" : "Low confidence";
+    var spreadStr = s.tempSpread != null ? formatSpreadValue(s.tempSpread) : "n/a";
+    lines.push("");
+    lines.push(confLabel + " — models agree within " + spreadStr);
+    lines.push("Based on " + (s.modelCount || "?") + " of 6 models reporting");
+    if (conf === "low") {
+      lines.push("");
+      lines.push("Treat this slot with caution; the actual temperature could vary meaningfully.");
+    }
+  }
+  return lines.join("\n");
+}
+
+function formatSpreadValue(c) {
+  if (c == null) return "0°";
+  var v = state.unit === "F" ? Math.round(c * 9 / 5) : Math.round(c);
+  return v + "°" + state.unit;
 }
 
 function escapeText(s) { return (s || "").replace(/[<>&]/g, function(c) { return c === "<" ? "&lt;" : c === ">" ? "&gt;" : "&amp;"; }); }
