@@ -231,14 +231,23 @@ h1 em { font-style: italic; font-weight: 500; color: var(--sun); }
   overflow: hidden; text-overflow: ellipsis;
   padding: 0 4px;
 }
-.clim-badge {
+.day-sub {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.clim-pill {
   display: inline-block;
-  font-size: 9px; letter-spacing: 0.14em; font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
   background: rgba(185,167,255,0.18);
   color: var(--clim);
-  padding: 3px 8px; border-radius: 10px;
-  margin: 0 auto 6px;
-  align-self: center;
+  padding: 2px 7px;
+  border-radius: 8px;
+  line-height: 1.2;
 }
 
 /* Slot stack */
