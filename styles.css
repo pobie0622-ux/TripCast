@@ -342,7 +342,7 @@ h1 em { font-style: italic; font-weight: 500; color: var(--sun); }
   color: var(--text-faint);
   margin-bottom: 8px;
 }
-.legend-row { margin-bottom: 5px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.legend-row { margin-bottom: 5px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; line-height: 1.5; }
 .legend-row strong { color: var(--text); font-weight: 600; }
 .legend-row .conf-dot { flex-shrink: 0; align-self: center; }
 .legend-row .clim-pill { flex-shrink: 0; align-self: center; margin-right: 2px; }
