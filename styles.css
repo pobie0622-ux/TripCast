@@ -268,7 +268,10 @@ h1 em { font-style: italic; font-weight: 500; color: var(--sun); }
   row-gap: 2px;
   text-align: left;
   min-width: 0;
+  cursor: help;
+  transition: background .15s ease;
 }
+.slot:hover { background: rgba(0,0,0,0.32); }
 .slot-label {
   font-size: 10px; letter-spacing: 0.14em; font-weight: 700;
   color: var(--text-dim);
@@ -319,6 +322,35 @@ h1 em { font-style: italic; font-weight: 500; color: var(--sun); }
   padding: 0 4px;
 }
 .footer strong { color: var(--text-dim); font-weight: 600; }
+
+.legend {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px 28px;
+  padding: 22px 24px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+}
+.legend-section { font-size: 12.5px; color: var(--text-dim); line-height: 1.55; }
+.legend-title {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+.legend-row { margin-bottom: 5px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.legend-row strong { color: var(--text); font-weight: 600; }
+.legend-row .conf-dot { flex-shrink: 0; align-self: center; }
+.legend-row .clim-pill { flex-shrink: 0; align-self: center; margin-right: 2px; }
+.legend-row .drop-mini { flex-shrink: 0; align-self: center; }
+.legend-note { color: var(--text-faint); font-style: italic; margin-top: 6px; }
+.legend-sources { grid-column: 1 / -1; padding-top: 12px; border-top: 1px solid var(--panel-border); font-size: 11.5px; color: var(--text-faint); }
+.legend-sources strong { color: var(--text-dim); }
+
 .conf-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; margin: 0 4px; }
 .conf-dot.conf-high { background: var(--conf-high); }
 .conf-dot.conf-med { background: var(--conf-med); }
