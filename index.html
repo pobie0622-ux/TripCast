@@ -59,10 +59,26 @@
         </div>
       </div>
       <div class="scroll-wrap"><div id="grid" class="grid"></div></div>
-      <div class="footer">
-        <div><strong>Sources:</strong> ECMWF, GFS, ICON, GEM, JMA, UK Met Office (via Open-Meteo)</div>
-        <div><strong>Confidence:</strong> <span class="conf-dot conf-high"></span> high <span class="conf-dot conf-med"></span> medium <span class="conf-dot conf-low"></span> low</div>
-        <div><strong>HIST AVG:</strong> beyond 16-day horizon; shows 10-yr historical average for that date</div>
+      <div class="legend">
+        <div class="legend-section">
+          <div class="legend-title">How to read this</div>
+          <div class="legend-row"><strong>AM</strong> 6 AM–12 PM &middot; <strong>PM</strong> 12–6 PM &middot; <strong>EVE</strong> 6 PM–midnight (all destination local time)</div>
+          <div class="legend-row"><svg class="drop-mini" width="6" height="8"><use href="#drop"/></svg> shows the chance of precipitation during that window.</div>
+        </div>
+        <div class="legend-section">
+          <div class="legend-title">Confidence dots</div>
+          <div class="legend-row"><span class="conf-dot conf-high"></span> <strong>High</strong> — the 6 models agree within ~2.5°C. Trust this slot.</div>
+          <div class="legend-row"><span class="conf-dot conf-med"></span> <strong>Medium</strong> — models disagree by 2.5–5°C. Forecast is plausible but watch for revisions.</div>
+          <div class="legend-row"><span class="conf-dot conf-low"></span> <strong>Low</strong> — models disagree by more than 5°C. Treat the number as a rough estimate.</div>
+          <div class="legend-row legend-note">Hover or tap any slot for details on the spread and how many models reported.</div>
+        </div>
+        <div class="legend-section">
+          <div class="legend-title">Beyond 16 days</div>
+          <div class="legend-row"><span class="clim-pill">HIST AVG</span> means the forecast horizon has been exceeded for that date. We're showing the <strong>10-year historical average</strong> for that calendar day instead — not a forecast. Re-check closer to the date.</div>
+        </div>
+        <div class="legend-section legend-sources">
+          <strong>Sources:</strong> ECMWF, GFS, ICON, GEM, JMA, UK Met Office (via Open-Meteo)
+        </div>
       </div>
     </section>
     <div id="export-root" aria-hidden="true"></div>
