@@ -478,7 +478,9 @@ function confidenceLevel(spread, source) {
 
 function buildSlotTooltip(s, conf, source, slot) {
   var lines = [];
-  var hours = slot.startHour + ":00 – " + (slot.endHour === 24 ? "midnight" : slot.endHour + ":00");
+  var hours = slot.label === "EVE" 
+    ? "6:00 PM – 12 AM"
+    : slot.startHour + ":00 – " + (slot.endHour === 24 ? "12 AM" : slot.endHour + ":00");
   lines.push(slot.label + " (" + hours + " local)");
   if (source === "climatology") {
     lines.push("");
